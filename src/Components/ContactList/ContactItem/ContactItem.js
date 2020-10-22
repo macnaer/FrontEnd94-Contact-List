@@ -8,9 +8,12 @@ class ContactItem extends React.Component {
     created: this.props.created,
     status: this.props.status,
     email: this.props.email,
+    gender: this.props.gender,
   };
   render() {
-    const { avatar, role, name, status, email, created } = this.state;
+    const { avatar, role, name, status, email, created, gender } = this.state;
+
+    const URL = `https://api.randomuser.me/portraits/${gender}/${avatar}.jpg`;
 
     let statusStyle = "label label-default";
 
@@ -22,7 +25,7 @@ class ContactItem extends React.Component {
     return (
       <tr>
         <td>
-          <img src={avatar} alt="" />
+          <img src={URL} alt="" />
           <a href="#" className="user-link">
             {name}
           </a>

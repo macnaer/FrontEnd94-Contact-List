@@ -12,6 +12,7 @@ const ContactList = ({ List }) => {
         created={item.created}
         status={item.status}
         email={item.email}
+        gender={item.gender}
       />
     );
   });
@@ -35,7 +36,9 @@ const ContactList = ({ List }) => {
             <th>&nbsp;</th>
           </tr>
         </thead>
-        <tbody>{item}</tbody>
+        <tbody>
+          {item.length !== 0 ? item : <h2>Contact list is empty.</h2>}
+        </tbody>
       </table>
     </div>
   );
