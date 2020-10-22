@@ -11,6 +11,14 @@ class ContactItem extends React.Component {
   };
   render() {
     const { avatar, role, name, status, email, created } = this.state;
+
+    let statusStyle = "label label-default";
+
+    if (status === "Active") {
+      statusStyle = "label label-success";
+    } else if (status === "Inactive") {
+      statusStyle = "label label-default";
+    }
     return (
       <tr>
         <td>
@@ -22,7 +30,7 @@ class ContactItem extends React.Component {
         </td>
         <td>{created}</td>
         <td className="text-center">
-          <span className="label label-default">{status}</span>
+          <span className={statusStyle}>{status}</span>
         </td>
         <td>
           <a href="#">{email}</a>
