@@ -67,6 +67,19 @@ class App extends Component {
     });
   };
 
+  onDelete = (id) => {
+    const index = this.state.List.findIndex((elem) => elem.id === id);
+    const partOne = this.state.List.slice(0, index);
+    const partTwo = this.state.List.slice(index + 1);
+    const newList = [...partOne, ...partTwo];
+
+    this.setState(() => {
+      return {
+        List: newList,
+      };
+    });
+  };
+
   render() {
     return (
       <Router>
@@ -78,6 +91,7 @@ class App extends Component {
             render={() => (
               <ContactList
                 onStatusChange={this.onStatusChange}
+                onDelete={this.onDelete}
                 List={this.state.List}
               />
             )}

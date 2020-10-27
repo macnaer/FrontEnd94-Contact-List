@@ -15,7 +15,7 @@ class ContactItem extends React.Component {
     const { avatar, role, name, email, created, gender } = this.state;
     const { status } = this.props;
 
-    const { onStatusChange } = this.props;
+    const { onStatusChange, onDelete } = this.props;
 
     const URL = `https://api.randomuser.me/portraits/${gender}/${avatar}.jpg`;
 
@@ -58,7 +58,7 @@ class ContactItem extends React.Component {
             </span>
           </a>
           <a href="#" className="table-link danger">
-            <span className="fa-stack">
+            <span className="fa-stack" onClick={onDelete}>
               <i className="fa fa-square fa-stack-2x"></i>
               <i className="fa fa-trash-o fa-stack-1x fa-inverse"></i>
             </span>
