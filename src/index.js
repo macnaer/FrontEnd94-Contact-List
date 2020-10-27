@@ -2,9 +2,11 @@ import React, { Fragment, Component } from "react";
 import ReactDOM from "react-dom";
 import { v4 as uuidv4 } from "uuid";
 import "./index.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-// Include components
+// Import components
 import ContactList from "./Components/ContactList/ContactList";
+import Header from "./Components/Header/header";
 
 class App extends Component {
   state = {
@@ -43,17 +45,16 @@ class App extends Component {
   };
 
   render() {
-    console.log("Log => ", this.state.List);
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-12">
-            <div className="main-box clearfix">
-              <ContactList List={this.state.List} />
-            </div>
-          </div>
-        </div>
-      </div>
+      <Router>
+        <Header />
+        <Switch>
+          <Route
+            path="/"
+            render={() => <ContactList List={this.state.List} />}
+          />
+        </Switch>
+      </Router>
     );
   }
 }
