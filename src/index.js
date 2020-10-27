@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Import components
 import ContactList from "./Components/ContactList/ContactList";
 import Header from "./Components/Header/header";
+import NotFound from "./Components/NotFound/notFound";
 
 class App extends Component {
   state = {
@@ -51,8 +52,10 @@ class App extends Component {
         <Switch>
           <Route
             path="/"
+            exact
             render={() => <ContactList List={this.state.List} />}
           />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     );

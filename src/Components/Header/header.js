@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./header.css";
 
 class Header extends React.Component {
@@ -21,9 +22,9 @@ class Header extends React.Component {
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">
+                <Link class="navbar-brand" to="/">
                   Brand
-                </a>
+                </Link>
               </div>
 
               <div
@@ -32,12 +33,12 @@ class Header extends React.Component {
               >
                 <ul class="nav navbar-nav">
                   <li class="active">
-                    <a href="/">
+                    <Link to="/">
                       Home <span class="sr-only">(current)</span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="/add-new-contact">Add new contact</a>
+                    <Link to="/add-new-contact">Add new contact</Link>
                   </li>
                 </ul>
                 <form class="navbar-form navbar-right">
