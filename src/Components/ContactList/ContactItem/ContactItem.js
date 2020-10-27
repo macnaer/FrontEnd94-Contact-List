@@ -1,4 +1,5 @@
 import React from "react";
+import "./ContactItem.css";
 
 class ContactItem extends React.Component {
   state = {
@@ -11,7 +12,10 @@ class ContactItem extends React.Component {
     gender: this.props.gender,
   };
   render() {
-    const { avatar, role, name, status, email, created, gender } = this.state;
+    const { avatar, role, name, email, created, gender } = this.state;
+    const { status } = this.props;
+
+    const { onStatusChange } = this.props;
 
     const URL = `https://api.randomuser.me/portraits/${gender}/${avatar}.jpg`;
 
@@ -19,9 +23,9 @@ class ContactItem extends React.Component {
 
     if (status === "Active") {
       statusStyle = "label label-success";
-    } else if (status === "Inactive") {
-      statusStyle = "label label-default";
-    }
+    } else if (status === "Inctive") statusStyle = "label label-default";
+    else if (status === "Banned") statusStyle = "label label-danger";
+    else if (status === "Pending") statusStyle = "label label-warning";
     return (
       <tr>
         <td>
@@ -33,7 +37,9 @@ class ContactItem extends React.Component {
         </td>
         <td>{created}</td>
         <td className="text-center">
-          <span className={statusStyle}>{status}</span>
+          <span className={statusStyle} onClick={onStatusChange}>
+            {status}
+          </span>
         </td>
         <td>
           <a href="#">{email}</a>

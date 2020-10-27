@@ -1,7 +1,7 @@
 import React from "react";
 import ContactItem from "./ContactItem/ContactItem";
 
-const ContactList = ({ List }) => {
+const ContactList = ({ List, onStatusChange }) => {
   const item = List.map((item) => {
     return (
       <ContactItem
@@ -13,6 +13,7 @@ const ContactList = ({ List }) => {
         status={item.status}
         email={item.email}
         gender={item.gender}
+        onStatusChange={() => onStatusChange(item.id)}
       />
     );
   });

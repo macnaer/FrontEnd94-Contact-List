@@ -45,6 +45,28 @@ class App extends Component {
     ],
   };
 
+  onStatusChange = (id) => {
+    const index = this.state.List.findIndex((elem) => elem.id === id);
+    const tmpList = this.state.List.slice();
+    switch (tmpList[index].status) {
+      case "Active":
+        tmpList[index].status = "Inactive";
+        break;
+      case "Inactive":
+        tmpList[index].status = "Pending";
+        break;
+      case "Pending":
+        tmpList[index].status = "Banned";
+        break;
+      case "Banned":
+        tmpList[index].status = "Active";
+    }
+
+    this.setState({
+      List: tmpList,
+    });
+  };
+
   render() {
     return (
       <Router>
@@ -53,7 +75,12 @@ class App extends Component {
           <Route
             path="/"
             exact
-            render={() => <ContactList List={this.state.List} />}
+            render={() => (
+              <ContactList
+                onStatusChange={this.onStatusChange}
+                List={this.state.List}
+              />
+            )}
           />
           <Route component={NotFound} />
         </Switch>
