@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ContactList from "./Components/ContactList/ContactList";
 import Header from "./Components/Header/header";
 import NotFound from "./Components/NotFound/notFound";
+import AddContact from "./Components/AddContact/AddContact";
 
 class App extends Component {
   state = {
@@ -67,6 +68,26 @@ class App extends Component {
     });
   };
 
+  onCreate = (name, role, avatar, status, email, gender) => {
+    let newContact = {
+      id: uuidv4(),
+      name: name,
+      role: role,
+      avatar: avatar,
+      created: Date.now(),
+      status: status,
+      email: email,
+      gender: gender,
+    };
+
+    const newList = [...this.state.List, newContact];
+    this.setState(() => {
+      return {
+        List: newList,
+      };
+    });
+  };
+
   onDelete = (id) => {
     const index = this.state.List.findIndex((elem) => elem.id === id);
     const partOne = this.state.List.slice(0, index);
@@ -95,6 +116,11 @@ class App extends Component {
                 List={this.state.List}
               />
             )}
+          />
+          <Route
+            path="/add-new-contact"
+            exact
+            render={() => <AddContact onCreate={this.onCreate} />}
           />
           <Route component={NotFound} />
         </Switch>
