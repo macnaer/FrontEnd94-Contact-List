@@ -12,41 +12,44 @@ import AddContact from "./Components/AddContact/AddContact";
 import EditContact from "./Components/EditContact/EditContact";
 
 class App extends Component {
+  DB_URL = "https://contact-list-front-end.firebaseio.com/contacts.json";
   state = {
-    List: [
-      {
-        id: uuidv4(),
-        name: "Mila Kunis",
-        role: "Member",
-        avatar: "1",
-        created: "2013/08/08",
-        status: "Inactive",
-        email: "mila@kunis.com",
-        gender: "women",
-      },
-      {
-        id: uuidv4(),
-        name: "George Clooney",
-        role: "Admin",
-        avatar: "2",
-        created: "2013/08/08",
-        status: "Active",
-        email: "marlon@brando.com",
-        gender: "men",
-      },
-      {
-        id: uuidv4(),
-        name: "Camilla Terry",
-        role: "Member",
-        avatar: "3",
-        created: "2013/08/08",
-        status: "Active",
-        email: "camilla@gmail.com",
-        gender: "women",
-      },
-    ],
+    List: [],
     currentContact: "",
   };
+
+  componentDidMount() {
+    this.updateData();
+  }
+
+  updateData() {
+    fetch(this.DB_URL)
+      .then((responce) => {
+        return responce.json();
+      })
+      .then((data) => {
+        if (data == null) {
+          this.setState({
+            List: [],
+          });
+        } else {
+          this.setState({
+            List: data,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+
+  onSaveData(List) {
+    fetch(this.DB_URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(List),
+    });
+  }
 
   onStatusChange = (id) => {
     const index = this.state.List.findIndex((elem) => elem.id === id);
@@ -64,7 +67,7 @@ class App extends Component {
       case "Banned":
         tmpList[index].status = "Active";
     }
-
+    this.onSaveData(tmpList);
     this.setState({
       List: tmpList,
     });
@@ -83,6 +86,7 @@ class App extends Component {
     };
 
     const newList = [...this.state.List, newContact];
+    this.onSaveData(newList);
     this.setState(() => {
       return {
         List: newList,
@@ -96,6 +100,7 @@ class App extends Component {
     const partTwo = this.state.List.slice(index + 1);
     const newList = [...partOne, ...partTwo];
 
+    this.onSaveData(newList);
     this.setState(() => {
       return {
         List: newList,
@@ -138,6 +143,7 @@ class App extends Component {
     const partTwo = this.state.List.slice(index + 1);
     const newList = [...partOne, newContact, ...partTwo];
 
+    this.onSaveData(newList);
     this.setState({
       List: newList,
     });
