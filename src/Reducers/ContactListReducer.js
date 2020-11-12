@@ -3,7 +3,7 @@ const initialState = {
   currentContact: [],
 };
 
-const ContactListReducer = (state = initialState, action) => {
+const contactListReducer = (state = initialState, action) => {
   switch (action.type) {
     case "LOAD_CONTACT_LIST":
       console.log("Reducer => ", action.payload);
@@ -21,4 +21,4 @@ const ContactListReducer = (state = initialState, action) => {
   }
 };
 
-export default ContactListReducer;
+export default contactListReducer;

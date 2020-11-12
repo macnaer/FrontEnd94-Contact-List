@@ -24,7 +24,7 @@ class ContactList extends React.Component {
 
   render() {
     console.log("props ", this.props);
-    const { List } = this.props;
+    const { List = [] } = this.props;
     return (
       <div className="container">
         <div className="row">
@@ -78,9 +78,9 @@ class ContactList extends React.Component {
     );
   }
 }
-const mapStateToProps = ({ ContactListReducer }) => {
-  console.log("mapStateToProps ", ContactListReducer);
-  const { List } = ContactListReducer.state;
+const mapStateToProps = ({ contactListReducer }) => {
+  console.log("mapStateToProps ", contactListReducer);
+  const { List } = contactListReducer;
   return { List };
 };
 
