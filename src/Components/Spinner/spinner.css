@@ -1,0 +1,8 @@
+.spinner {
+  text-align: center;
+  margin-top: 100px;
+}
+.spinner-size {
+  width: 10em;
+  height: 10em;
+}

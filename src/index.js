@@ -1,5 +1,6 @@
 import React, { Fragment, Component } from "react";
 import ReactDOM from "react-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -18,7 +19,6 @@ import EditContact from "./Components/EditContact/EditContact";
 const App = () => {
   return (
     <Router>
-      <Header />
       <Switch>
         <Provider store={store}>
           <Route path="/" exact render={() => <ContactList />} />
